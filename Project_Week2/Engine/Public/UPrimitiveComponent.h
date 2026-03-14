@@ -21,5 +21,4 @@ public:
 
 	virtual const char* GetTypeString() const = 0;
 	virtual void Render() override = 0;
-	virtual bool LineTrace(const struct FRay& Ray, float& OutDistance) override;
 };
