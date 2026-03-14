@@ -1,24 +1,55 @@
 #pragma once
 #include "Core.h"
+#include "UActorComponent.h"
 
-class USceneComponent : public UObject
+class USceneComponent : public UActorComponent 
 {
 public:
-	USceneComponent() : Location(0, 0, 0), Rotation(0, 0, 0), Scale(1, 1, 1) {};
+	FVector RelativeLocation;
+	FVector RelativeRotation;
+	FVector RelativeScale;
 
-	FVector GetLocation() const { return Location; }
-	FVector SetLocation(const FVector& NewLocation) { Location = NewLocation; }
+	FMatrix WorldMatrix;
 
-	FVector GetRotation() const { return Rotation; }
-	FVector SetRotation(const FVector& NewRotation) { Rotation = NewRotation; }
+	USceneComponent* Parent = nullptr;
+	TArray<USceneComponent*> Children;
 
-	FVector GetScale() const { return Scale; }
-	FVector SetScale(const FVector& NewScale) { Scale = NewScale; }
+	FBoxSphereBounds* Bounds = nullptr;
 
-private:
-	FVector Location;
-	FVector Rotation;
-	FVector Scale;
+public:
+	USceneComponent();
 
 
+	FVector GetRelativeLocation() const { return RelativeLocation; }
+	FVector SetRelativeLocation(const FVector& NewLocation) {
+		Location = NewLocation;
+		UpdateWorldMatrix();
+	}
+
+	FVector GetRelativeRotation() const { return RelativeRotation; }
+	FVector SetRelativeRotation(const FVector& NewRotation) {
+		RelativeRotation = NewRotation;
+		UpdateWorldMatrix();
+	}
+
+	FVector GetRelativeScale() const { return RelativeScale; }
+	FVector SetRelativeScale(const FVector& NewScale) {
+		RelativeScale = NewScale;
+		UpdateWorldMatrix();
+	}
+
+	FVector GetWorldLocation() const;
+	const FMatrix& GetWorldMatrix() const { return WorldMatrix; }
+
+	// attachment
+	void SetupAttachment(USceneComponent* NewParent);
+
+	void UpdateWorldMatrix();
+
+	// Bounds
+	virtual void GetLocalBounds(FVector& OutMin, FVector& OutMax);
+
+	void UpdateBounds();
+
+	virtual bool LineTrace(const FRay& Ray, float& OutDistance);
 };
