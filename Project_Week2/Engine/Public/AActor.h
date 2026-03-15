@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "Engine.h"
+#include "Renderer.h"
 
 class AActor : public UObject
 {
@@ -41,17 +42,27 @@ public:
 	void SetActorLocation(const FVector& NewLoc);
 	FVector GetActorLocation() const;
 
-	void SetActorRotation(const FRotator& NewRot);
-	FRotator GetActorRotation() const;
+	void SetActorRotation(const FVector& NewRot);
+	FVector GetActorRotation() const;
+
+	void SetActorScale(const FVector& NewSca);
+	FVector GetActorScale() const;
 
 	USceneComponent* GetRootComponent() const { return RootComponent; }
-	const Ftring& GetName() const { return ActorName; }
+	const FString& GetName() const { return ActorName; }
+
+	void SetRootComponent(USceneComponent* NewRootComponent);
+	void AttachComponentToRoot(USceneComponent* Component);
+
+
 
 	TArray<UActorComponent*> OwnedComponents;
 	FString ActorName;
 
-	void RenderComponents(URenderer* Renderer)
+	void RenderComponents(URenderer* Renderer);
+	void RenderSceneComponentHierarchy(USceneComponent* SceneComp, URenderer* Renderer);
+
 
 	// 현재 액터가 활성화 상태인지 (Tick 실행 여부)
-	bool bIsActive = true;
+	bool bIsActivate = true;
 };
