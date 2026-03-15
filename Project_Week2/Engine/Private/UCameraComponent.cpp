@@ -1,4 +1,4 @@
-#include "UCameraComponent.h"
+#include "Engine.h"
 
 UCameraComponent::UCameraComponent()
 	: FOV(90.0f)
@@ -6,45 +6,61 @@ UCameraComponent::UCameraComponent()
 	, NearPlane(0.1f)
 	, FarPlane(1000.0f)
 {
-	// 초기 행렬 설정
-	UpdateMatrices();
+	bCanEverTick = true;
+	ViewMatrix = FMatrix::Identity;
+	ProjectionMatrix = FMatrix::Identity;
 }
 
 void UCameraComponent::UpdateMatrices()
 {
-	// View Matrix 계산 (카메라 위치와 회전에 따라)
+	// View Matrix 계산 (FMatrix의 정적 함수 사용)
 	FVector CameraLocation = GetWorldLocation();
-	FVector Forward = GetForwardVector();  // 카메라가 바라보는 방향
-	FVector Up = GetUpVector();           // 카메라의 위쪽 방향
+	FVector CameraRotation = RelativeRotation; // 라디안 단위
 
-	// Look-At 행렬 생성 (간단한 구현)
-	ViewMatrix = FMatrix::LookAt(CameraLocation, CameraLocation + Forward, Up);
+	ViewMatrix = FMatrix::MakeViewMatrix(CameraLocation, CameraRotation);
 
 	// Projection Matrix 계산
-	float FovRadians = FOV * (3.14159f / 180.0f); // 도를 라디안으로 변환
-	ProjectionMatrix = FMatrix::Perspective(FovRadians, AspectRatio, NearPlane, FarPlane);
+	ProjectionMatrix = FMatrix::MakePerspectiveMatrix(FOV, AspectRatio, NearPlane, FarPlane);
 }
 
 void UCameraComponent::UpdateAspectRatio(uint32 Width, uint32 Height)
 {
 	if (Height > 0)
 	{
-		AspectRatio = (float)Width / (float)Height;
-		UpdateMatrices(); // 비율 변경 시 투영 행렬 업데이트
+		AspectRatio = static_cast<float>(Width) / static_cast<float>(Height);
+		UpdateMatrices();
 	}
 }
 
-// 추가 유틸리티 함수들
 FVector UCameraComponent::GetForwardVector() const
 {
-	// 회전에서 앞쪽 벡터 계산 (간단한 구현)
-	FVector Rotation = GetRelativeRotation();
-	// 실제로는 회전 행렬에서 Forward 벡터를 추출해야 함
-	return FVector(1.0f, 0.0f, 0.0f); // 임시로 X축 방향
+	// 월드 행렬에서 Forward 벡터 추출 (Z축, Row 2)
+	FVector Forward(
+		WorldMatrix.M[2][0],
+		WorldMatrix.M[2][1],
+		WorldMatrix.M[2][2]
+	);
+	return Forward.Normalize();
+}
+
+FVector UCameraComponent::GetRightVector() const
+{
+	// 월드 행렬에서 Right 벡터 추출 (X축, Row 0)
+	FVector Right(
+		WorldMatrix.M[0][0],
+		WorldMatrix.M[0][1],
+		WorldMatrix.M[0][2]
+	);
+	return Right.Normalize();
 }
 
 FVector UCameraComponent::GetUpVector() const
 {
-	// 회전에서 위쪽 벡터 계산 (간단한 구현)
-	return FVector(0.0f, 0.0f, 1.0f); // 임시로 Z축 방향
+	// 월드 행렬에서 Up 벡터 추출 (Y축, Row 1)
+	FVector Up(
+		WorldMatrix.M[1][0],
+		WorldMatrix.M[1][1],
+		WorldMatrix.M[1][2]
+	);
+	return Up.Normalize();
 }

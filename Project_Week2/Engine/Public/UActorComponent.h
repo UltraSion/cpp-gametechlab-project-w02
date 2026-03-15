@@ -15,7 +15,7 @@ public:
 	virtual void Activate(); 
 	virtual void Deactivate();
 
-	bool IsActive() const { return bIsActive; }
+	bool IsActive() const { return bIsActivate; }
 
 public:
 	bool bCanEverTick; // TickÀ» ÄÓÁö ²øÁö °áÁ¤

@@ -1,6 +1,5 @@
 #pragma once
-#include "UObject.h"
-#include "UPrimitiveComponent.h"
+#include "Engine.h"
 
 class UCubeComp : public UPrimitiveComponent
 {
@@ -13,14 +12,19 @@ public:
 		return "Cube";
 	}
 
-	virtual void Render() override;
-
 	virtual void GetLocalBounds(FVector& OutMin, FVector& OutMax) override
 	{
 		OutMin = FVector(-0.5f, -0.5f, -0.5f);
 		OutMax = FVector(0.5f, 0.5f, 0.5f);
 	}
 
+	void SetCuveSize(const FVector& Size) {
+		CubeSize = Size;
+	}
+	FVector GetCubeSize() const {
+		return CubeSize;
+	}
+
 private:
-	void GenerateCubeVertices();
+	FVector CubeSize = FVector(1.0f, 1.0f, 1.0f);
 };

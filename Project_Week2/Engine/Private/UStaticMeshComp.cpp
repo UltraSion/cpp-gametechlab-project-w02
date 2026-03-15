@@ -99,4 +99,6 @@ void UStaticMeshComp::ReleaseRenderResources()
 		IndexBuffer->Release();
 		IndexBuffer = nullptr;
 	}
+
+	IndexCount = 0;
 }

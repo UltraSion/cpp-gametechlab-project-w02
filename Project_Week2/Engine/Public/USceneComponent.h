@@ -1,6 +1,6 @@
 #pragma once
 #include "Core.h"
-#include "UActorComponent.h"
+#include "Engine.h"
 
 class USceneComponent : public UActorComponent 
 {
@@ -22,7 +22,7 @@ public:
 
 	FVector GetRelativeLocation() const { return RelativeLocation; }
 	FVector SetRelativeLocation(const FVector& NewLocation) {
-		Location = NewLocation;
+		RelativeLocation = NewLocation;
 		UpdateWorldMatrix();
 	}
 
@@ -39,6 +39,7 @@ public:
 	}
 
 	FVector GetWorldLocation() const;
+	FVector GetWorldScale() const;
 	const FMatrix& GetWorldMatrix() const { return WorldMatrix; }
 
 	// attachment
@@ -51,5 +52,5 @@ public:
 
 	void UpdateBounds();
 
-	virtual bool LineTrace(const FRay& Ray, float& OutDistance);
+	bool LineTrace(const FRay& Ray, float& OutDistance);
 };

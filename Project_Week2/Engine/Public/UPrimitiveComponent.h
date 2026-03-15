@@ -1,7 +1,7 @@
 #pragma once
-
 #include "Core.h"
-#include "USceneComponent.h"
+#include "Renderer.h"
+#include "Engine.h"
 
 struct FBoxSphereBounds;
 
@@ -20,5 +20,5 @@ public:
 	bool bVisible = true;
 
 	virtual const char* GetTypeString() const = 0;
-	virtual void Render() override = 0;
+	virtual void Render(URenderer* Render) = 0;
 };

@@ -1,4 +1,4 @@
-#include "UActorComponent.h"
+#include "Engine.h"
 
 void UActorComponent::BeginPlay()
 {
@@ -7,10 +7,10 @@ void UActorComponent::BeginPlay()
 
 void UActorComponent::Activate()
 {
-	bIsActive = true;
+	bIsActivate = true;
 }
 
 void UActorComponent::Deactivate()
 {
-	bIsActive = false;
+	bIsActivate = false;
 }

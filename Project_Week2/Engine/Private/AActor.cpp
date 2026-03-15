@@ -1,10 +1,8 @@
 #include "Core.h"
-#include "AActor.h"
-#include "UActorComponent.h"
-#include "USceneComponent.h"
+#include "Engine.h"
 
 AActor::AActor()
-	: bIsActive(true)
+	: bIsActivate(true)
 	, ActorName("Defaul")
 	, RootComponent(nullptr)
 {
@@ -13,7 +11,7 @@ AActor::AActor()
 
 void AActor::Tick(float DeltaTime)
 {
-	if (!bIsActive) return;
+	if (!bIsActivate) return;
 
 	for (UActorComponent* Comp : OwnedComponents)
 	{
@@ -26,7 +24,7 @@ void AActor::Tick(float DeltaTime)
 
 void AActor::BeginPlay()
 {
-	if (!bIsActive) return;
+	if (!bIsActivate) return;
 
 	for (UActorComponent* Comp : OwnedComponents)
 	{
@@ -39,7 +37,7 @@ void AActor::BeginPlay()
 
 FVector AActor::GetActorLocation() const
 {
-	return RootComponent ? RootComponent->GetLocation() : FVector(0, 0, 0);
+	return RootComponent ? RootComponent->GetRelativeLocation() : FVector(0, 0, 0);
 }
 
 void AActor::SetActorLocation(const FVector& NewLoc)
@@ -73,7 +71,7 @@ void AActor::SetActorScale(const FVector& NewRot)
 
 FVector AActor::GetActorScale() const
 {
-	return RootComponent ? RootComponent->GetRelativeRotation() : FVector(0, 0, 0);
+	return RootComponent ? RootComponent->GetRelativeScale() : FVector(0, 0, 0);
 }
 
 

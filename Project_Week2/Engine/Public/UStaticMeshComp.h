@@ -1,8 +1,9 @@
 #pragma once
 #include "Core.h"
-#include "UPrimitiveComponent.h"
+#include "Engine.h"
+#include "Renderer.h"
 
-class UStaticMesh; // 전방 선언
+class UStaticMesh;
 
 class UStaticMeshComp : public UPrimitiveComponent
 {

@@ -1,5 +1,6 @@
 #include "USceneComponent.h"
 
+
 USceneComponent::USceneComponent()
 	: RelativeLocation(0, 0, 0), RelativeRotation(0, 0, 0), RelativeScale(1, 1, 1), Parent(nullptr) {
 	WorldMatrix = FMatrix::Identity;
@@ -18,9 +19,9 @@ void USceneComponent::SetupAttachment(USceneComponent* NewParent)
 void USceneComponent::UpdateWorldMatrix()
 {
 	// S * R * T
-	FMatrix S = FMatrix::Scale(RelativeScale);
-	FMatrix R = FMatrix::Rotation(RelativeRotation);
-	FMatrix T = FMatrix::Translation(RelativeLocation);
+	FMatrix S = FMatrix::MakeScale(RelativeScale);
+	FMatrix R = FMatrix::MakeRotationXYZ(RelativeRotation);
+	FMatrix T = FMatrix::MakeTranslation(RelativeLocation);
 
 	FMatrix LocalMatrix = S * R * T;
 
@@ -45,34 +46,49 @@ FVector USceneComponent::GetWorldLocation() const
 {
 	// 월드 매트릭스에서 위치 추출
 	/*return WorldMatrix.GetTranslation();*/
-	return FVector(WorldMatrix.m[3][0], WorldMatrix.m[3][1], WorldMatrix.m[3][2]);
+	return FVector(WorldMatrix.M[3][0], WorldMatrix.M[3][1], WorldMatrix.M[3][2]);
 }
 
-virtual void GetLocalBounds(FVector& OutMin, FVector& OutMax)
+void GetLocalBounds(FVector& OutMin, FVector& OutMax)
 {
 	OutMin = FVector(0, 0, 0);
 	OutMax = FVector(0, 0, 0);
 }
 
-void UpdateBounds()
+FVector USceneComponent::GetWorldScale() const
 {
+	// 월드 매트릭스에서 스케일 추출
+	float ScaleX = FVector(WorldMatrix.M[0][0], WorldMatrix.M[0][1], WorldMatrix.M[0][2]).Length();
+	float ScaleY = FVector(WorldMatrix.M[1][0], WorldMatrix.M[1][1], WorldMatrix.M[1][2]).Length();
+	float ScaleZ = FVector(WorldMatrix.M[2][0], WorldMatrix.M[2][1], WorldMatrix.M[2][2]).Length();
+	return FVector(ScaleX, ScaleY, ScaleZ);
+}
+
+void USceneComponent::UpdateBounds()
+{
+	if (!Bounds)
+	{
+		Bounds = new FBoxSphereBounds();
+	}
+
 	FVector LocalMin, LocalMax;
 	GetLocalBounds(LocalMin, LocalMax);
-	
+
 	// 월드 행렬에서 위치(Origin) 추출
-	Bounds.Origin = FVector(WorldMatrix._41, WorldMatrix._42, WorldMatrix._43);
+	Bounds->Origin = GetWorldLocation();
 
 	// 로컬 크기에 월드 스케일을 적용하여 월드 크기(Extent) 계산
 	FVector Scale = GetWorldScale();
-	Bounds.BoxExtent = ((LocalMax - LocalMin) * 0.5f) * Scale;
+	Bounds->BoxExtent = ((LocalMax - LocalMin) * 0.5f) * Scale;
 
 	// 구체 반지름 업데이트
-	Bounds.SphereRadius = Bounds.BoxExtent.Length();
+	Bounds->SphereRadius = Bounds->BoxExtent.Length();
 }
 
-virtual bool LineTrace(const FRay& Ray, float& OutDistance)
+
+bool LineTrace(const FRay& Ray, float& OutDistance)
 {
-	if (!bVisible) return false;
+	if (!Bounds) return false;
 
 	return Bounds.Intersect(Ray, OutDistance);
 }

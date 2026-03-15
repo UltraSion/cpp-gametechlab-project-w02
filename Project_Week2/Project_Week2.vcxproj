@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v145</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project2\Core;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\Renderer;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\Renderer\public;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\Engine\Public;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\Engine;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\GUI\Public;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\GUI;C:\Users\Seyoung\source\repos\cpp-gametechlab-project-w02\Project_Week2\Core\Public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Core\Public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Core;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Renderer;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Renderer\public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Engine;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Engine\Public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\GUI;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\GUI\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Core\Public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Core;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Renderer;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Renderer\public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Engine;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\Engine\Public;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\GUI;C:\Users\jungle\Desktop\cpp-gametechlab-project-w02\Project_Week2\GUI\Public;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Core\Public;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Core;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Renderer;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Renderer\public;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Engine;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\Engine\Public;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\GUI;C:\Users\jungle\source\repos\cpp-gametechlab-project-w02\Project_Week2\GUI\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,9 +136,15 @@
     <ClInclude Include="Core\Public\FVertex.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Public\AActor.h" />
+    <ClInclude Include="Engine\Public\FRay.h" />
     <ClInclude Include="Engine\Public\UActorComponent.h" />
+    <ClInclude Include="Engine\Public\UCameraComponent.h" />
+    <ClInclude Include="Engine\Public\UCubeComp.h" />
     <ClInclude Include="Engine\Public\UPrimitiveComponent.h" />
     <ClInclude Include="Engine\Public\USceneComponent.h" />
+    <ClInclude Include="Engine\Public\UStaticMesh.h" />
+    <ClInclude Include="Engine\Public\UStaticMeshComp.h" />
+    <ClInclude Include="Engine\Public\UWorld.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Renderer\Private\FVertex.h" />
     <ClInclude Include="Renderer\public\URenderer.h" />
@@ -159,7 +165,15 @@
     <ClCompile Include="Core\Private\Math\FVector.cpp" />
     <ClCompile Include="Core\Private\Math\FVector4.cpp" />
     <ClCompile Include="Core\Public\Math\FVector4.h" />
+    <ClCompile Include="Engine\Private\AActor.cpp" />
+    <ClCompile Include="Engine\Private\UActorComponent.cpp" />
+    <ClCompile Include="Engine\Private\UCameraComponent.cpp" />
+    <ClCompile Include="Engine\Private\UCubeComp.cpp" />
+    <ClCompile Include="Engine\Private\UPrimitiveComponent.cpp" />
     <ClCompile Include="Engine\Private\USceneComponent.cpp" />
+    <ClCompile Include="Engine\Private\UStaticMesh.cpp" />
+    <ClCompile Include="Engine\Private\UStaticMeshComp.cpp" />
+    <ClCompile Include="Engine\Private\UWorld.cpp" />
     <ClCompile Include="Renderer\Private\URenderer.cpp" />
     <ClCompile Include="Core\Private\UEngineStatics.cpp" />
     <ClCompile Include="Core\Private\UFactory.cpp" />

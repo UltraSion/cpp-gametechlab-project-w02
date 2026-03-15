@@ -17,7 +17,7 @@ public:
 
 	// 액터와 함께 파일에 저장됨. 기본형을 메모리에 하나 만들어둠 (CDO)
 	template <typename T = UActorComponent >
-	T* CreateDefaultSubobject(FString FName)
+	T* CreateDefaultSubobject(FString Name)
 	{
 		T* NewComp = UFactory::CreateObject<T>(Name);
 
