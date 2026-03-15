@@ -31,7 +31,7 @@ void UStaticMesh::GetBounds(FVector& OutMin, FVector& OutMax) const
 
 UStaticMesh* UStaticMesh::CreateCube()
 {
-	UStaticMesh* Mesh = new UStaticMesh();
+	UStaticMesh* Mesh = new UStaticMesh();  // UFactory::CreateObject<UStaticMesh>();
 
 	// 큐브 정점 데이터 (8개 정점, 각 면마다 색상)
 	TArray<FVertex> Vertices = {

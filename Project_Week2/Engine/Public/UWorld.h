@@ -3,7 +3,7 @@
 #include "Engine.h"
 #include "Renderer.h"
 
-class UWorld
+class UWorld : public UObject
 {
 public:
 	UWorld();
@@ -12,7 +12,7 @@ public:
 	template<typename T>
 	T* SpawnActor()
 	{
-		T* NewActor = new T();
+		T* NewActor = new T(); // UFactory::CreateObject<T>();
 		Actors.push_back(NewActor);
 		// BeginPlay는 월드 초기화 시점에 한번에 호출
 		return NewActor;

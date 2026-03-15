@@ -21,19 +21,19 @@ public:
 
 
 	FVector GetRelativeLocation() const { return RelativeLocation; }
-	FVector SetRelativeLocation(const FVector& NewLocation) {
+	void SetRelativeLocation(const FVector& NewLocation) {
 		RelativeLocation = NewLocation;
 		UpdateWorldMatrix();
 	}
 
 	FVector GetRelativeRotation() const { return RelativeRotation; }
-	FVector SetRelativeRotation(const FVector& NewRotation) {
+	void SetRelativeRotation(const FVector& NewRotation) {
 		RelativeRotation = NewRotation;
 		UpdateWorldMatrix();
 	}
 
 	FVector GetRelativeScale() const { return RelativeScale; }
-	FVector SetRelativeScale(const FVector& NewScale) {
+	void SetRelativeScale(const FVector& NewScale) {
 		RelativeScale = NewScale;
 		UpdateWorldMatrix();
 	}
