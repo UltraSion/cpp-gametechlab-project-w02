@@ -194,7 +194,7 @@
     <ClInclude Include="Render\Public\Geometry\Sphere.h" />
     <ClInclude Include="Render\Public\Structs.h" />
     <ClInclude Include="Render\Public\URenderer.h" />
-    <ClInclude Include="Serialization\Public\FPrimitiveJsonConverter.h" />
+    <ClInclude Include="Serialization\Public\FJsonConverter.h" />
     <ClInclude Include="Serialization\Public\FWorldSaveConverter.h" />
     <ClInclude Include="Serialization\Public\FWorldSaveData.h" />
     <ClInclude Include="ThirdParty\Json\json.hpp" />
@@ -260,7 +260,8 @@
     <ClCompile Include="GUI\Private\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Render\Private\URenderer.cpp" />
     <ClCompile Include="Core\Private\UObjectBaseUtility.cpp" />
-    <ClCompile Include="Serialization\Private\FPrimitiveJsonConverter.cpp" />
+    <ClCompile Include="Serialization\Private\FJsonConverter.cpp" />
+    <ClCompile Include="Serialization\Private\FWorldSaveConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Render\Public\Shaders\Default.hlsl">
