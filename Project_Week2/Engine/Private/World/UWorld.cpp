@@ -83,8 +83,8 @@ void UWorld::RemoveActor(AActor* InActor)
     int targetIndex = 0;
     for (targetIndex = 0; targetIndex < Actors.size(); targetIndex++)
     {
-        Actors[targetIndex] == InActor;
-        break;
+        if(Actors[targetIndex] == InActor)
+            break;
     }
 
     auto target = Actors[targetIndex];

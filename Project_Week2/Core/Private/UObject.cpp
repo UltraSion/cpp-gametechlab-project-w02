@@ -1,6 +1,6 @@
 #include "UEngineStatics.h"
 #include "UObject.h"
-
+#include "FMemory.h"
 //void UObject::Initialize(const FUObjectInitializer& ObjectInitilizer)
 //{
 //	UUID = ObjectInitilizer.UUID;

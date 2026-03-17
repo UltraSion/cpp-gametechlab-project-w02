@@ -50,7 +50,8 @@ T* NewObject(const FString& InName, const FVector& Location)
 	return object;
 }
 
-inline void* Destroy(UObject* object)
+template<UObjectType T>
+inline void* Destroy(T* object)
 {
 	auto TargetIndex = object->InternalIndex;
 	GUObjectArray.FreeUObjectIndox(object);
