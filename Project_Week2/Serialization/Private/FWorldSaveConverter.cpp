@@ -128,7 +128,7 @@ AActor* FWorldSaveConverter::MakeActorFromRecord(const FPrimitiveRecord& Record)
         // 알 수 없는 타입
         return nullptr;
     }
-
+    
     NewActor->GetRootComponent()->SetRelativeLocation(Record.Location);
     NewActor->GetRootComponent()->SetRelativeRotation(Record.Rotation);
     NewActor->GetRootComponent()->SetRelativeScale(Record.Scale);

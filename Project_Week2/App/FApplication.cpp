@@ -313,6 +313,8 @@ void FApplication::MainLoop()
         Tick(Delta.count()); // 엔진 상태 업데이트
         RenderFrame(); // 화면 출력
 
+        USceneComponent* temp = NewObjectRoot<USceneComponent>();
+        DestroyObjectGC(temp);
         FGarbageCollector::CollectGarbage();
     }
 }
@@ -719,7 +721,7 @@ bool FApplication::LoadScene()
     }
 
     // FWorldSaveConverter::ToWorld는 World 초기화 후 Scene 파일에 있는 Actor들만 World에 추가하기 때문에 마우스 펄스도 여기서 다시 추가
-    CreatePointerPulseActor();
+    //CreatePointerPulseActor();
     return true;
 }
 
@@ -1433,30 +1435,30 @@ void FApplication::RefreshPointerPulseTransform()
 
 void FApplication::CreatePointerPulseActor()
 {
-    // 원래 있던 마우스 펄스 생성 부분 복붙
-    if (!World || !ClickCircleMesh)
-    {
-        return;
-    }
+    //// 원래 있던 마우스 펄스 생성 부분 복붙
+    //if (!World || !ClickCircleMesh)
+    //{
+    //    return;
+    //}
 
-    ClickCircleActor = NewObject<AActor>(World);
-    ClickCircleComp = NewObject<UStaticMeshComponent>(World);
+    //ClickCircleActor = NewObject<AActor>(World);
+    //ClickCircleComp = NewObject<UStaticMeshComponent>(World);
 
-    ClickCircleComp->SetStaticMesh(ClickCircleMesh);
-    ClickCircleComp->SetRelativeLocation(FVector::ZeroVector);
-    ClickCircleComp->SetRelativeRotation(FVector::ZeroVector);
-    ClickCircleComp->SetRelativeScale(FVector(0.0f, 0.0f, 0.0f));
+    //ClickCircleComp->SetStaticMesh(ClickCircleMesh);
+    //ClickCircleComp->SetRelativeLocation(FVector::ZeroVector);
+    //ClickCircleComp->SetRelativeRotation(FVector::ZeroVector);
+    //ClickCircleComp->SetRelativeScale(FVector(0.0f, 0.0f, 0.0f));
 
-    ClickCircleComp->SetRenderColor(FVector4(0.98f, 0.84f, 0.10f, 1.0f));
-    ClickCircleComp->SetUseVertexColor(false);
-    ClickCircleComp->SetDepthEnable(false);
-    ClickCircleComp->SetCullMode(ERenderCullMode::None);
-    ClickCircleComp->SetVisibility(false);
+    //ClickCircleComp->SetRenderColor(FVector4(0.98f, 0.84f, 0.10f, 1.0f));
+    //ClickCircleComp->SetUseVertexColor(false);
+    //ClickCircleComp->SetDepthEnable(false);
+    //ClickCircleComp->SetCullMode(ERenderCullMode::None);
+    //ClickCircleComp->SetVisibility(false);
 
-    ClickCircleActor->AddComponent(ClickCircleComp);
-    ClickCircleActor->SetRootComponent(ClickCircleComp);
+    //ClickCircleActor->AddComponent(ClickCircleComp);
+    //ClickCircleActor->SetRootComponent(ClickCircleComp);
 
-    World->AddActor(ClickCircleActor);
+    //World->AddActor(ClickCircleActor);
 }
 
 FString FApplication::BuildSceneFilePath() const

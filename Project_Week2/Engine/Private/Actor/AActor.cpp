@@ -33,6 +33,7 @@ void AActor::AddComponent(UActorComponent* InComponent)
 		return;
 	}
 
+	InComponent->SetOuter(this);
 	InComponent->SetOwner(this);
 	Components.push_back(InComponent);
 }

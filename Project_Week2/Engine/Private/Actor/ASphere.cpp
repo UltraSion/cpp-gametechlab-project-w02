@@ -4,8 +4,7 @@
 #include "Resource/UStaticMesh.h"
 #include "Resource/BuiltInMeshFactory.h"
 
-ASphere::ASphere()
-    : APrimitiveActor()
+ASphere::ASphere() : APrimitiveActor()
 {
     InitializeActor();
 }

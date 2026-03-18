@@ -9,6 +9,7 @@
 
 class UStaticMesh : public UObject
 {
+DECLARE_UClass(UStaticMesh, UObject)
 public:
 	UStaticMesh();
 	virtual ~UStaticMesh();

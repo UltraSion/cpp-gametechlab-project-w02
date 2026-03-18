@@ -19,6 +19,7 @@ UPrimitiveComponent* APrimitiveActor::GetPrimitiveComponent() const
 void APrimitiveActor::SetPrimitiveComponent(UPrimitiveComponent* InPrimitiveComponent)
 {
     PrimitiveComponent = InPrimitiveComponent;
+    InPrimitiveComponent->SetOuter(this);
 
     if (PrimitiveComponent)
     {
