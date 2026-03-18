@@ -681,6 +681,10 @@ void FApplication::NewScene()
 
     // 현재 선택된 Actor를 선택 해제하여 Gizmo 등 해제..?
     SetSelectedActor(nullptr);
+    if (Renderer)
+    {
+        Renderer->InvalidateMeshResourceCache();
+    }
     World->Clear();
     
     // World를 초기화하기 때문에 일단 마우스 펄스도 월드에 다시 추가
@@ -714,6 +718,10 @@ bool FApplication::LoadScene()
     }
 
     SetSelectedActor(nullptr);
+    if (Renderer)
+    {
+        Renderer->InvalidateMeshResourceCache();
+    }
 
     if (!FWorldSaveConverter::ToWorld(SaveData, World))
     {
